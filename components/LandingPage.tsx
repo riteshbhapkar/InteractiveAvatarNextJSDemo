@@ -6,7 +6,7 @@ export default function LandingPage() {
   const [showAvatar, setShowAvatar] = useState(false);
 
   if (showAvatar) {
-    return <InteractiveAvatar />;
+    return <InteractiveAvatar onClose={() => setShowAvatar(false)} />;
   }
 
   return (
