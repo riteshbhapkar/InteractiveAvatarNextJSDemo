@@ -84,6 +84,12 @@ const CONVERSATION_FLOW = {
   }
 };
 
+// Define a type for the keys of CONVERSATION_FLOW
+type ConversationStep = keyof typeof CONVERSATION_FLOW;
+
+// Define a type for the responses of each step
+type Responses = typeof CONVERSATION_FLOW[ConversationStep]['responses'];
+
 interface InteractiveAvatarProps {
   onClose: () => void;
 }
@@ -95,7 +101,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
   const [data, setData] = useState<StartAvatarResponse>();
   const mediaStream = useRef<HTMLVideoElement>(null);
   const avatar = useRef<StreamingAvatar | null>(null);
-  const [currentStep, setCurrentStep] = useState('start');
+  const [currentStep, setCurrentStep] = useState<ConversationStep>('start');
   const [showForm, setShowForm] = useState(false);
   const [isAvatarSpeaking, setIsAvatarSpeaking] = useState(false);
   const lastResponseRef = useRef("");
@@ -175,10 +181,11 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
   async function handleSpeak() {
     if (!avatar.current) {
       setDebug("Avatar API not initialized");
-
       return;
     }
-    // speak({ text: text, task_type: TaskType.REPEAT })
+
+    const text = "Your text here"; // Define the text variable
+
     await avatar.current.speak({ text: text, taskType: TaskType.REPEAT, taskMode: TaskMode.SYNC }).catch((e) => {
       setDebug(e.message);
     });
@@ -208,9 +215,10 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
     
     console.log("Button clicked with responseKey:", responseKey);
     
-    setCurrentStep(responseKey);
+    setCurrentStep(responseKey as ConversationStep);
     
-    const response = CONVERSATION_FLOW[currentStep].responses[responseKey];
+    // Use type assertion to specify that responseKey is a key of the current step's responses
+    const response = CONVERSATION_FLOW[currentStep].responses[responseKey as keyof Responses];
     console.log("Response to speak:", response);
     
     // Store response in ref
