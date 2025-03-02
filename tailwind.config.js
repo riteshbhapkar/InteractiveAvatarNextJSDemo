@@ -37,7 +37,10 @@ module.exports = {
         'scale-up': 'scale-up 0.5s ease-out',
         'bounce-in': 'bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
         'draw-check': 'draw-check 0.8s ease-out forwards',
-      }
+      },
+      colors: {
+        primary: '#1f8844',
+      },
     },
   },
   darkMode: "class",

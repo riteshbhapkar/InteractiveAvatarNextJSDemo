@@ -75,7 +75,7 @@ export default function PMSForm({ clientName, portfolioValue }: PMSFormProps) {
         <>
           <Card className="w-[600px] bg-gradient-to-br from-gray-900 to-black border border-gray-800">
             <CardBody className="p-8">
-              <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+              <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-[#1f8844] to-[#1f8844] bg-clip-text text-transparent">
                 PMS Application Form
               </h2>
               <div className="space-y-4">
@@ -91,7 +91,7 @@ export default function PMSForm({ clientName, portfolioValue }: PMSFormProps) {
             </CardBody>
           </Card>
           <div className="flex justify-center">
-            <p className={`text-sm font-mono bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent ${currentField < formData.length ? 'animate-pulse' : ''}`}>
+            <p className={`text-sm font-mono bg-gradient-to-r from-cyan-400 to-[#1f8844] bg-clip-text text-transparent ${currentField < formData.length ? 'animate-pulse' : ''}`}>
               System: {currentField < formData.length 
                 ? "Auto-populating form fields // Status: In Progress..." 
                 : "Form Autofilled and sent to Ops Team"}

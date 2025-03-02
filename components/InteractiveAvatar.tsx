@@ -26,8 +26,8 @@ const CONVERSATION_FLOW = {
       { id: 'services', text: 'What are the services you offer?' }
     ],
     responses: {
-      greeting: "Hi! I'm your virtual fund manager. So you are looking for a PMS. That's great! Can you tell me more about your investment portfolio value?",
-      experience: "I'm an AI assistant specialized in wealth management at Ourmoney corporation. We offer a wide range of services to help you manage your money. We can help you with portfolio management, financial planning, and retirement planning."
+      greeting: "Hi! I'm Aema. So you are looking for a PMS. That's great! Can you tell me more about your investment portfolio value?",
+      services: "I'm an AI assistant specialized in wealth management at Ourmoney corporation. We offer a wide range of services to help you manage your money. We can help you with portfolio management, financial planning, and retirement planning."
     }
   },
   greeting: {
@@ -155,7 +155,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
     try {
       const res = await avatar.current.createStartAvatar({
         quality: AvatarQuality.Low,
-        avatarName: "SilasHR_public",
+        avatarName: "June_HR_public",
         knowledgeId: "",
         voice: {
           rate: 1.5,
@@ -264,7 +264,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                 </video>
                 <div className="flex flex-col gap-2 absolute top-3 right-3">
                   <Button
-                    className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
                     size="md"
                     variant="shadow"
                     onClick={handleInterrupt}
@@ -272,7 +272,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                     Interrupt task
                   </Button>
                   <Button
-                    className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
                     size="md"
                     variant="shadow"
                     onClick={endSession}
@@ -281,19 +281,25 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                   </Button>
                 </div>
               </div>
-            ) : !isLoadingSession ? (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <Button
-                  className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg px-8 py-6 rounded-lg"
-                  size="lg"
-                  variant="shadow"
-                  onClick={startSession}
-                >
-                  Start session
-                </Button>
-              </div>
             ) : (
-              <Spinner color="default" size="lg" />
+              !isLoadingSession ? (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                  <p className="text-lg font-bold text-center mb-2">Disclaimer</p>
+                  <p className="text-sm text-gray-400 text-center mb-4" style={{fontSize: '1.2rem'}}>
+                  This is a demo to showcase the process. For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
+                  </p>
+                  <Button
+                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white text-lg px-8 py-6 rounded-lg"
+                    size="lg"
+                    variant="shadow"
+                    onClick={startSession}
+                  >
+                    Start session
+                  </Button>
+                </div>
+              ) : (
+                <Spinner color="default" size="lg" />
+              )
             )}
           </CardBody>
         </Card>
@@ -312,7 +318,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
           {CONVERSATION_FLOW[currentStep]?.buttons.map((button) => (
             <Button
               key={button.id}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-lg px-6 py-4"
+              className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white text-lg px-6 py-4"
               size="lg"
               onClick={() => handleButtonClick(button.id)}
             >
