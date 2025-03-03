@@ -294,8 +294,9 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
                   <p className="text-lg font-bold text-center mb-2">Disclaimer</p>
                   <p className="text-sm text-gray-400 text-center mb-4" style={{fontSize: '1.2rem'}}>
-                  This is a demo to showcase the process. For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
+                  This is a demo to showcase the lead qualification process of Ema. <br/>For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
                   </p>
+                 
                   <Button
                     className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white text-lg px-8 py-6 rounded-lg"
                     size="lg"
@@ -305,6 +306,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                     Start session
                   </Button>
                 </div>
+                
               ) : (
                 <Spinner color="default" size="lg" />
               )
@@ -335,6 +337,14 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
           ))}
         </div>
       )}
+
+      {/* Disclaimer and Email Section */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
+        <p className="text-sm text-gray-400 mb-4" style={{fontSize: '0.7rem'}}>
+          If the start session button is not working, it probably means that you've tried to start a session immediately after the previous one. Please wait for some time before starting a new session. <br/> Either this, or the credits on the free plan have ran out. :')<br /> 
+          In that case, please contact me on <a href="mailto:f20201976@goa.bits-pilani.ac.in"><b className="text-indigo-300">Email</b></a>
+        </p>
+      </div>
     </div>
   );
 }
