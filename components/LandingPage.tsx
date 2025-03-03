@@ -15,7 +15,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 blur-[100px] bg-gradient-to-br from-[#1f8844] to-[#1f8844] opacity-30 rounded-full"></div>
         <div className="relative z-10 text-center space-y-8">
           <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1f8844] to-[#1f8844]">
-            Virtual Lead Assistant
+            Ema Sales Call Secretary
           </h1>
           <p className="text-xl text-gray-300">
             Your AI-powered companion, ready to assist 24/7
@@ -25,7 +25,7 @@ export default function LandingPage() {
             size="lg"
             onClick={() => setShowAvatar(true)}
           >
-            Talk to Agent
+            Talk to Ema
           </Button>
         </div>
       </div>
