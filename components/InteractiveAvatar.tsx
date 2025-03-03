@@ -341,7 +341,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
       {/* Disclaimer and Email Section */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
         <p className="text-sm text-gray-400 mb-4" style={{fontSize: '0.7rem'}}>
-          If the start session button is not working, it probably means that you've tried to start a session immediately after the previous one. Please wait for some time before starting a new session. <br/> Either this, or the credits on the free plan have ran out. :')<br /> 
+          If the start session button is not working, it probably means that you've tried to start a session immediately after the previous one. Please wait for some time before starting a new session. <br/> Either this, or the credits on the free plan have ran out. :&apos;)<br /> 
           In that case, please contact me on <a href="mailto:f20201976@goa.bits-pilani.ac.in"><b className="text-indigo-300">Email</b></a>
         </p>
       </div>
