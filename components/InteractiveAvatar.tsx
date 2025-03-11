@@ -16,7 +16,7 @@ import { useMemoizedFn, usePrevious } from "ahooks";
 import InteractiveAvatarTextInput from "./InteractiveAvatarTextInput";
 import PMSForm from "./PMSForm";
 
-import {AVATARS, STT_LANGUAGE_LIST} from "@/app/lib/constants";
+import { AVATARS, STT_LANGUAGE_LIST } from "@/app/lib/constants";
 
 // Define your conversation flow
 const CONVERSATION_FLOW = {
@@ -76,7 +76,7 @@ const CONVERSATION_FLOW = {
   },
   below50: {
     buttons: [
-      {id: 'thanks', text: 'Thank you.'}
+      { id: 'thanks', text: 'Thank you.' }
     ],
     responses: {
       thanks: "Thank you for your time. We will get back to you soon."
@@ -130,7 +130,7 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
     avatar.current = new StreamingAvatar({
       token: newToken,
     });
-    
+
     avatar.current.on(StreamingEvents.AVATAR_START_TALKING, (e) => {
       console.log("Avatar started talking", e);
       setIsAvatarSpeaking(true);
@@ -139,9 +139,9 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
     avatar.current.on(StreamingEvents.AVATAR_STOP_TALKING, async (e) => {
       console.log("Avatar stopped talking", e);
       setIsAvatarSpeaking(false);
-      
+
       console.log("Last response when stopped talking:", lastResponseRef.current);
-      
+
       if (lastResponseRef.current.includes("Thank you for providing your details")) {
         console.log("Showing form...");
         setTimeout(() => {
@@ -212,23 +212,23 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
 
   async function handleButtonClick(responseKey: string) {
     if (!avatar.current) return;
-    
+
     console.log("Button clicked with responseKey:", responseKey);
-    
+
     setCurrentStep(responseKey as ConversationStep);
-    
+
     // Use type assertion to specify that responseKey is a key of the current step's responses
     const response = CONVERSATION_FLOW[currentStep].responses[responseKey as keyof Responses];
     console.log("Response to speak:", response);
-    
+
     // Store response in ref
     lastResponseRef.current = response;
-    
+
     try {
-      await avatar.current.speak({ 
-        text: response, 
-        taskType: TaskType.REPEAT, 
-        taskMode: TaskMode.SYNC 
+      await avatar.current.speak({
+        text: response,
+        taskType: TaskType.REPEAT,
+        taskMode: TaskMode.SYNC
       });
     } catch (error) {
       console.error("Error in speaking:", error);
@@ -254,74 +254,87 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
   return (
     <div className="min-h-screen w-full flex flex-col">
       {!showForm ? (
-        <Card className="flex-1 bg-gradient-to-br from-gray-900 to-black border border-gray-800">
-          <CardBody className="flex flex-col justify-center items-center">
-            {stream ? (
-              <div className="w-[900px] h-[500px] justify-center items-center flex rounded-lg overflow-hidden relative">
-                <video
-                  ref={mediaStream}
-                  autoPlay
-                  playsInline
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
-                >
-                  <track kind="captions" />
-                </video>
-                <div className="flex flex-col gap-2 absolute top-3 right-3">
-                  <Button
-                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
-                    size="md"
-                    variant="shadow"
-                    onClick={handleInterrupt}
+        <>
+          <Card className="flex-1 bg-gradient-to-br from-gray-900 to-black border border-gray-800">
+            <CardBody className="flex flex-col justify-center items-center">
+              {stream ? (
+                <div className="w-[900px] h-[500px] justify-center items-center flex rounded-lg overflow-hidden relative">
+                  <video
+                    ref={mediaStream}
+                    autoPlay
+                    playsInline
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
                   >
-                    Interrupt task
-                  </Button>
-                  <Button
-                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
-                    size="md"
-                    variant="shadow"
-                    onClick={endSession}
-                  >
-                    End session
-                  </Button>
+                    <track kind="captions" />
+                  </video>
+                  <div className="flex flex-col gap-2 absolute top-3 right-3">
+                    <Button
+                      className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
+                      size="md"
+                      variant="shadow"
+                      onClick={handleInterrupt}
+                    >
+                      Interrupt task
+                    </Button>
+                    <Button
+                      className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white"
+                      size="md"
+                      variant="shadow"
+                      onClick={endSession}
+                    >
+                      End session
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              !isLoadingSession ? (
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                  <p className="text-lg font-bold text-center mb-2">Disclaimer</p>
-                  <p className="text-sm text-gray-400 text-center mb-4" style={{fontSize: '1.2rem'}}>
-                  This is a demo to showcase the lead qualification process of Ema. <br/>For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
-                  </p>
-                 
-                  <Button
-                    className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white text-lg px-8 py-6 rounded-lg"
-                    size="lg"
-                    variant="shadow"
-                    onClick={startSession}
-                  >
-                    Start session
-                  </Button>
-                </div>
-                
               ) : (
-                <Spinner color="default" size="lg" />
-              )
-            )}
-          </CardBody>
-        </Card>
+                !isLoadingSession ? (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                    <p className="text-sm text-gray-400 text-center mb-2" style={{fontSize: '1.2rem'}}>
+                      <span className="text-indigo-300 font-semibold">Tip: Try saying you need help managing your portfolio and above 50 lakhs to see Ema in action!</span>
+                    </p>
+                    <p className="text-lg font-bold text-center mb-2">Disclaimer</p>
+                    <p className="text-sm text-gray-400 text-center mb-4" style={{fontSize: '1.2rem'}}>
+                      This is a demo to showcase the lead qualification process of Ema. <br/>For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
+                    </p>
+                    
+                    <Button
+                      className="bg-gradient-to-r from-[#1f8844] to-[#1f8844] text-white text-lg px-8 py-6 rounded-lg"
+                      size="lg"
+                      variant="shadow"
+                      onClick={startSession}
+                    >
+                      Start session
+                    </Button>
+                  </div>
+                ) : (
+                  <Spinner color="default" size="lg" />
+                )
+              )}
+            </CardBody>
+          </Card>
+          
+          {!stream && (
+            <div className="w-full text-center py-8">
+              <p className="text-sm text-gray-400" style={{ fontSize: '0.7rem' }}>
+                If the start session button is not working, it probably means that you&apos;ve tried to start a session immediately after the previous one. Please wait for some time before starting a new session. <br /> Either this, or the credits on the free plan have ran out. :&apos;)<br />
+                In that case, please contact me on <a href="mailto:f20201976@goa.bits-pilani.ac.in"><b className="text-indigo-300">Email</b></a>
+              </p>
+            </div>
+          )}
+        </>
       ) : (
         <div className="flex-1 flex items-center justify-center">
-          <PMSForm 
+          <PMSForm
             clientName="John Doe"
             portfolioValue="80 lakhs"
           />
         </div>
       )}
-      
+
       {/* Conversation buttons */}
       {stream && !showForm && (
         <div className="fixed bottom-8 left-0 right-0 flex justify-center gap-4">
@@ -337,14 +350,6 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
           ))}
         </div>
       )}
-
-      {/* Disclaimer and Email Section */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
-        <p className="text-sm text-gray-400 mb-4" style={{fontSize: '0.7rem'}}>
-          If the start session button is not working, it probably means that you&apos;ve tried to start a session immediately after the previous one. Please wait for some time before starting a new session. <br/> Either this, or the credits on the free plan have ran out. :&apos;)<br /> 
-          In that case, please contact me on <a href="mailto:f20201976@goa.bits-pilani.ac.in"><b className="text-indigo-300">Email</b></a>
-        </p>
-      </div>
     </div>
   );
 }
