@@ -26,7 +26,7 @@ const CONVERSATION_FLOW = {
       { id: 'services', text: 'What are the services you offer?' }
     ],
     responses: {
-      greeting: "Hi! I'm Aema. So you are looking for a PMS. That's great! Can you tell me more about your investment portfolio value?",
+      greeting: "Hi! I'm Ava. So you are looking for a PMS. That's great! Can you tell me more about your investment portfolio value?",
       services: "I'm an AI assistant specialized in wealth management at Ourmoney corporation. We offer a wide range of services to help you manage your money. We can help you with portfolio management, financial planning, and retirement planning."
     }
   },
