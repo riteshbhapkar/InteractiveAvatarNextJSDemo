@@ -294,11 +294,11 @@ export default function InteractiveAvatar({ onClose }: InteractiveAvatarProps) {
                 !isLoadingSession ? (
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
                     <p className="text-sm text-gray-400 text-center mb-2" style={{fontSize: '1.2rem'}}>
-                      <span className="text-indigo-300 font-semibold">Tip: Try saying you need help managing your portfolio and above 50 lakhs to see Ema in action!</span>
+                      <span className="text-indigo-300 font-semibold">Tip: Try saying you need help managing your portfolio and above 50 lakhs to see Ava in action!</span>
                     </p>
                     <p className="text-lg font-bold text-center mb-2">Disclaimer</p>
                     <p className="text-sm text-gray-400 text-center mb-4" style={{fontSize: '1.2rem'}}>
-                      This is a demo to showcase the lead qualification process of Ema. <br/>For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
+                      This is a demo to showcase the lead qualification process of Ava. <br/>For demonstration purposes, voice input has been disabled, and button inputs have been added instead. In the final implementation, this will be a fully interactive conversational agent that allows real-time voice interaction.
                     </p>
                     
                     <Button
